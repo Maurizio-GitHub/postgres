@@ -58,6 +58,15 @@ To create a .JSON file and copy the results into a it:
 \o test.json
 SELECT json_agg(t) FROM  (SELECT * FROM "Track" WHERE "Composer" = 'Queen') t;
 
+To install the "psycopg2" Python package:
+pip3 install psycopg2
+
+To create a new file:
+touch sql-psycopg2.py
+
+To install the "SQLAlchemy" Python package:
+pip3 install SQLAlchemy
+
 */
 
 
