@@ -3,7 +3,7 @@
 To download the Chinook PostgreSql database:
 wget https://raw.githubusercontent.com/lerocha/chinook-database/master/ChinookDatabase/DataSources/Chinook_PostgreSql.sql
 
-To set the environment variable needed for it to work:
+To set the environment variable needed for it to work (each time the workspace loads up):
 set_pg
 
 To access the Postgres CLI:

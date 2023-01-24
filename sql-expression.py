@@ -3,7 +3,7 @@ from sqlalchemy import (
     create_engine, Table, Column, Float, ForeignKey, Integer, String, MetaData
 )
 
-# Executing the instructions from our localhost "chinook" db:
+# Executing the instructions from our localhost, "chinook" db:
 db = create_engine("postgresql:///chinook")
 
 # MetaData contains a collection of our table objects,
