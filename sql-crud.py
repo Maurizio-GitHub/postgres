@@ -94,18 +94,63 @@ maurizio_loffredo = Programmer(
     famous_for="Natural Language Programming"
 )
 
+
 # Adding each instance of our programmers to our session:
-session.add(ada_lovelace)
+""" session.add(ada_lovelace)
 session.add(alan_turing)
 session.add(grace_hopper)
 session.add(margaret_hamilton)
 session.add(bill_gates)
 session.add(tim_berners_lee)
-session.add(maurizio_loffredo)
+session.add(maurizio_loffredo) """
+
+
+# When we only want one specific record, it is important to add .first().
+# Without it, we have to use a for-loop to iterate over the query list,
+# even though it will only find a single record using our supplied 'id':
+programmer = session.query(Programmer).filter_by(id=7).first()
+
+# Updating a single record:
+programmer.famous_for = "World President"
+
+# Updating multiple records; 'session.commit()' needs to be part of the loop:
+people = session.query(Programmer)
+for person in people:
+    if person.gender == "F":
+        person.gender = "Female"
+    elif person.gender == "M":
+        person.gender = "Male"
+    else:
+        print("Gender not defined")
+    session.commit()
 
 # Committing our session to the database:
 session.commit()
 
+# Selecting a single record via multiple user entries:
+fname = input("Enter a first name: ")
+lname = input("Enter a last name: ")
+programmer = session.query(Programmer).filter_by(
+    first_name=fname, last_name=lname).first()
+
+# Defensive programming:
+if programmer is not None:
+    print("Found: ", programmer.first_name + " " + programmer.last_name)
+    confirmation = input("Are you sure you want to delete this record? (y/n) ")
+    if confirmation.lower() == "y":
+        session.delete(programmer)
+        session.commit()
+        print("Programmer has been deleted")
+    else:
+        print("Programmer not deleted")
+else:
+    print("No records found")
+
+# Deleting multiple/all records:
+programmers = session.query(Programmer)
+for programmer in programmers:
+    session.delete(programmer)
+    session.commit()
 
 # Querying the database to find all Programmers:
 programmers = session.query(Programmer)
